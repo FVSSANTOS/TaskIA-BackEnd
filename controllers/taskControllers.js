@@ -15,10 +15,15 @@ async function createTask(req, res) {
     if (!titulo)
       return res.status(400).json({ error: "O título é obrigatório" });
 
-    const newTask = await taskService.updateTask(id, updateData);
-    res.status(200).json(updateTask);
+    const newTask = await taskService.createTask({
+      titulo,
+      descricao,
+      prioridade,
+      esforco,
+    });
+    res.status(201).json(newTask);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
 
@@ -28,7 +33,7 @@ async function updateTask(req, res) {
     const updateData = req.body;
     const updateTask = await taskService.updateTask(id, updateData);
     res.status(200).json(updateTask);
-  } catch (erro) {
+  } catch (error) {
     res.status(404).json({ error: error.message });
   }
 }
@@ -37,7 +42,7 @@ async function deleteTask(req, res) {
   try {
     const { id } = req.params;
     await taskService.deleteTask(id);
-    res.status(204).send();
+    res.status(200).json({ message: "tarefa deletada com sucesso" });
   } catch (error) {
     res.status(500).json({ error: "Erro ao deletar a tarefa" });
   }
