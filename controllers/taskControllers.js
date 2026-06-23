@@ -1,4 +1,5 @@
 const taskService = require("../services/tasksServices");
+const { estimateTask } = require("../controllers/aiController");
 
 async function getAllTasks(req, res) {
   try {
@@ -11,11 +12,17 @@ async function getAllTasks(req, res) {
 
 async function createTask(req, res) {
   try {
-    const { titulo, descricao, prioridade, esforco } = req.body;
-    if (!titulo)
+    console.log("createTask body:", req.body);
+    const { id, titulo, descricao } = req.body;
+
+    if (!titulo) {
       return res.status(400).json({ error: "O título é obrigatório" });
+    }
+
+    const { prioridade, esforco } = await estimateTask(titulo, descricao);
 
     const newTask = await taskService.createTask({
+      id,
       titulo,
       descricao,
       prioridade,
