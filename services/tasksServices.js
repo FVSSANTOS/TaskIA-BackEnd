@@ -34,7 +34,7 @@ async function createTask(taskData) {
   const tasks = await getTasks();
   const newTask = {
     id: Date.now().toString(),
-    status: "A Fazer", // Status inicial padrão
+    columnId: "col-backlog", // Status inicial padrão
     ...taskData,
   };
   tasks.push(newTask);
