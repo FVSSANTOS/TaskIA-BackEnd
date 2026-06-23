@@ -15,6 +15,14 @@ async function getTasks() {
   }
 }
 
+// func para buscar task por id
+async function getTaskById(id) {
+  const tasks = await getTasks();
+  const task = tasks.find((t) => t.id === id);
+  if (!task) throw new Error("Tarefa não encontrada");
+  return task;
+}
+
 // func para salvar no arquivo
 
 async function saveTasks(tasks) {
@@ -55,6 +63,7 @@ async function deleteTask(id) {
 
 module.exports = {
   getTasks,
+  getTaskById,
   createTask,
   updateTask,
   deleteTask,

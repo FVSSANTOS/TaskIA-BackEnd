@@ -55,9 +55,23 @@ async function deleteTask(req, res) {
   }
 }
 
+async function getTaskById(req, res) {
+  try {
+    const { id } = req.params;
+    const task = await taskService.getTaskById(id);
+    res.status(200).json(task);
+  } catch (error) {
+    if (error.message === "Tarefa não encontrada") {
+      return res.status(404).json({ error: error.message });
+    }
+    res.status(500).json({ error: "Erro ao buscar tarefa" });
+  }
+}
+
 module.exports = {
   getAllTasks,
   createTask,
   updateTask,
   deleteTask,
+  getTaskById,
 };
