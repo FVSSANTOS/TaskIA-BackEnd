@@ -34,7 +34,7 @@ async function saveTasks(newTask) {
 // func para atualizar task
 async function updateTask(id, updateData) {
   const tasks = await getTasks();
-  const taskIndex = tasks.findIndex((t) => t.id === id);
+  const taskIndex = tasks.findIndex((t) => t.id == id);
 
   if (taskIndex === -1) throw new Error("Tarefa não encontrada");
 
@@ -46,7 +46,7 @@ async function updateTask(id, updateData) {
 // func para deletar task
 async function deleteTask(id) {
   const tasks = await getTasks();
-  const filteredTasks = tasks.filter((t) => t.id !== id);
+  const filteredTasks = tasks.filter((t) => t.id != id);
   await saveTasks(filteredTasks);
 }
 

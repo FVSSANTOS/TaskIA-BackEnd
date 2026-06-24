@@ -33,7 +33,7 @@ async function saveColumn(newColumn) {
 // func para atualizar task
 async function updateColumn(id, updateData) {
   const column = await getColumns();
-  const columnIndex = column.findIndex((t) => t.id === id);
+  const columnIndex = column.findIndex((t) => t.id == id);
 
   if (columnIndex === -1) throw new Error("Colunas não encontrada");
 
@@ -45,7 +45,7 @@ async function updateColumn(id, updateData) {
 // func para deletar task
 async function deleteColumn(id) {
   const column = await getColumns();
-  const filteredColumn = column.filter((t) => t.id !== id);
+  const filteredColumn = column.filter((t) => t.id != id);
   await saveColumn(filteredColumn);
 }
 
