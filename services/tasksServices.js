@@ -18,28 +18,17 @@ async function getTasks() {
 // func para buscar task por id
 async function getTaskById(id) {
   const tasks = await getTasks();
-  const task = tasks.find((t) => t.id === id);
+  const task = tasks.find((t) => t.id == id);
   if (!task) throw new Error("Tarefa não encontrada");
   return task;
 }
 
-// func para salvar no arquivo
 
-async function saveTasks(tasks) {
-  await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
-}
-
-//func para criar task
-async function createTask(taskData) {
-  const tasks = await getTasks();
-  const newTask = {
-    id: Date.now().toString(),
-    status: "A Fazer", // Status inicial padrão
-    ...taskData,
-  };
+async function saveTasks(newTask) {
+  const data = await fs.readFile(tasksFilePath, "utf-8");
+  const tasks = JSON.parse(data);
   tasks.push(newTask);
-  await saveTasks(tasks);
-  return newTask;
+  await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
 }
 
 // func para atualizar task
@@ -64,7 +53,7 @@ async function deleteTask(id) {
 module.exports = {
   getTasks,
   getTaskById,
-  createTask,
+  saveTasks,
   updateTask,
   deleteTask,
 };

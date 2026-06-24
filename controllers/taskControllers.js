@@ -13,7 +13,7 @@ async function getAllTasks(req, res) {
 async function createTask(req, res) {
   try {
     console.log("createTask body:", req.body);
-    const { id, titulo, descricao } = req.body;
+    const { id, titulo, descricao, columnID } = req.body;
 
     if (!titulo) {
       return res.status(400).json({ error: "O título é obrigatório" });
@@ -21,8 +21,9 @@ async function createTask(req, res) {
 
     const { prioridade, esforco } = await estimateTask(titulo, descricao);
 
-    const newTask = await taskService.createTask({
+    const newTask = await taskService.saveTasks({
       id,
+      columnID,
       titulo,
       descricao,
       prioridade,
