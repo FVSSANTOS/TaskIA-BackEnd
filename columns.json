@@ -1,5 +1,3 @@
 [
-   { "id": "col-backlog", "title": "Backlog", "order": 1 },
-   { "id": "col-in-progress", "title": "In Progress", "order": 2 },
-   { "id": "col-done", "title": "Done", "order": 3 }
+
 ]
