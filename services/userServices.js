@@ -15,7 +15,7 @@ function saveUsers(users) {
 }
 
 // registrar usuário
-exports.register = (username, password) => {
+exports.register = (username, password, email) => {
   const users = readUsers();
   const userExists = users.find(u => u.username === username);
 
@@ -23,7 +23,7 @@ exports.register = (username, password) => {
     throw new Error('Usuário já existe!');
   }
 
-  const newUser = { id: Date.now(), username, password };
+  const newUser = { id: Date.now(), username, password, email };
   users.push(newUser);
   saveUsers(users);
 
