@@ -23,12 +23,11 @@ async function estimateTask(titulo, descricao) {
               text: `Você é um assistente de gerenciamento de projetos.
 Ao receber o título de uma tarefa, responda APENAS com um JSON válido,
 sem nenhum texto adicional, sem markdown, sem explicações.
-O formato deve ser exatamente:
-{"prioridade": "", "esforco": ""}
-Use apenas os valores Alta, Média ou Baixa para prioridade.
-Use apenas um valor de tempo para esforço, como "30 minutos", "1 hora" ou "3 horas".
-Título da tarefa: ${taskTitle}
-Descrição da tarefa: ${taskDescription}
+O formato deve ser no padrão que está no exemplo abaixo:
+{"priority": "", "effort": ""}
+Os valores de prioridade aceitos são: Alta, Média ou Baixa.
+O esforco deve ser uma estimativa de tempo (ex: "30 minutos", "1 hora", "3 horas").
+Título da tarefa: ${title}, Descrição da tarefa: ${description}
 `,
             },
           ],

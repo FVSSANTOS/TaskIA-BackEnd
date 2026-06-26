@@ -1,6 +1,5 @@
 [
   {
-<<<<<<< HEAD
     "id": "1782440704955",
     "title": "Criando o contollers da api",
     "description": "Criando o contollers d",
@@ -64,36 +63,3 @@
     "updatedAt": "2026-06-26T02:47:53.556Z"
   }
 ]
-=======
-    "id": "1782499711674",
-    "columnID": "backlog",
-    "title": "criar rotas",
-    "priority": "Alta",
-    "effort": "4 horas",
-    "createdAt": "2026-06-26T18:48:31.674Z",
-    "createdBy": "Current User",
-    "assignedTo": "Current User"
-  },
-  {
-    "id": "1782499737452",
-    "columnID": "backlog",
-    "title": "criar services",
-    "priority": "Média",
-    "effort": "4 horas",
-    "createdAt": "2026-06-26T18:48:57.453Z",
-    "createdBy": "Current User",
-    "assignedTo": "Current User"
-  },
-  {
-    "id": "1782500045371",
-    "columnID": "backlog",
-    "title": "criar rotas do usuario",
-    "description": "criação das rotas",
-    "priority": "Média",
-    "effort": "3 horas",
-    "createdAt": "2026-06-26T18:54:05.371Z",
-    "createdBy": "Current User",
-    "assignedTo": "Current User"
-  }
-]
->>>>>>> main

@@ -55,8 +55,7 @@ async function deleteColumn(id) {
 module.exports = {
   getColumns,
   getColumnById,
-  addColumn,
-  saveColumns,
+  saveColumn,
   updateColumn,
   deleteColumn,
 };
