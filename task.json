@@ -1,21 +1,32 @@
 [
   {
-    "id": "1782497624482",
+    "id": "1782499711674",
     "columnID": "backlog",
-    "title": "ImplementarCrud",
+    "title": "criar rotas",
     "priority": "Alta",
-    "effort": "3 horas",
-    "createdAt": "2026-06-26T18:13:44.482Z",
+    "effort": "4 horas",
+    "createdAt": "2026-06-26T18:48:31.674Z",
     "createdBy": "Current User",
     "assignedTo": "Current User"
   },
   {
-    "id": "1782498581567",
-    "columnID": "inProgress",
-    "title": "Criar front",
+    "id": "1782499737452",
+    "columnID": "backlog",
+    "title": "criar services",
     "priority": "Média",
-    "effort": "8 horas",
-    "createdAt": "2026-06-26T18:29:41.568Z",
+    "effort": "4 horas",
+    "createdAt": "2026-06-26T18:48:57.453Z",
+    "createdBy": "Current User",
+    "assignedTo": "Current User"
+  },
+  {
+    "id": "1782500045371",
+    "columnID": "backlog",
+    "title": "criar rotas do usuario",
+    "description": "criação das rotas",
+    "priority": "Média",
+    "effort": "3 horas",
+    "createdAt": "2026-06-26T18:54:05.371Z",
     "createdBy": "Current User",
     "assignedTo": "Current User"
   }
