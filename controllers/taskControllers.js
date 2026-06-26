@@ -4,7 +4,9 @@ const { estimateTask } = require("../controllers/aiController");
 async function getAllTasks(req, res) {
   try {
     const tasks = await taskService.getTasks();
+    console.log("getAllTasks tasks:", tasks);
     res.status(200).json(tasks);
+
   } catch (error) {
     res.status(500).json({ error: "Erro ao ler tarefas" });
   }
@@ -13,21 +15,22 @@ async function getAllTasks(req, res) {
 async function createTask(req, res) {
   try {
     console.log("createTask body:", req.body);
-    const { id, titulo, descricao, columnID } = req.body;
+    const { id, title, description, columnID } = req.body;
 
-    if (!titulo) {
+    if (!title) {
       return res.status(400).json({ error: "O título é obrigatório" });
     }
 
-    const { prioridade, esforco } = await estimateTask(titulo, descricao);
+    const { priority, effort } = await estimateTask(title, description);
+    console.log(priority)
 
-    const newTask = await taskService.saveTasks({
+    const newTask = await taskService.saveTask({
       id,
       columnID,
-      titulo,
-      descricao,
-      prioridade,
-      esforco,
+      title,
+      description,
+      priority,
+      effort,
     });
     res.status(201).json(newTask);
   } catch (error) {

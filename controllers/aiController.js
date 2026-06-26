@@ -1,8 +1,8 @@
 const axios = require("axios");
 require("dotenv").config();
 
-async function estimateTask(titulo, descricao) {
-  if (!titulo) {
+async function estimateTask(title, description) {
+  if (!title) {
     return "O campo 'titulo' é obrigatório.";
   }
 
@@ -23,10 +23,10 @@ async function estimateTask(titulo, descricao) {
 Ao receber o título de uma tarefa, responda APENAS com um JSON válido,
 sem nenhum texto adicional, sem markdown, sem explicações.
 O formato deve ser no padrão que está no exemplo abaixo:
-{"prioridade": "", "esforco": ""}
+{"priority": "", "effort": ""}
 Os valores de prioridade aceitos são: Alta, Média ou Baixa.
 O esforco deve ser uma estimativa de tempo (ex: "30 minutos", "1 hora", "3 horas").
-Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
+Título da tarefa: ${title}, Descrição da tarefa: ${description}
 `,
             },
           ],
@@ -39,12 +39,11 @@ Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
         "Content-Type": "application/json",
       },
     });
-
     // A resposta do Gemini 2.5 flash deve vir em um formato similar a:
     // { "candidates": [ { "content": { "parts": [ { "text": "{"prioridade": "Média", "esforco": "1 hora"}" } ] } } ] }
     const rawText = response.data.candidates[0].content.parts[0].text;
     const resultado = JSON.parse(rawText);
-
+    console.log
     return resultado;
   } catch (error) {
     console.error(

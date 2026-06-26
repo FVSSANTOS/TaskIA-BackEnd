@@ -57,6 +57,7 @@ async function deleteTask(id) {
 module.exports = {
   getTasks,
   getTaskById,
+  saveTask,
   saveTasks,
   updateTask,
   deleteTask,
