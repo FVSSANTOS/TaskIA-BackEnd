@@ -47,10 +47,10 @@ async function createTask(req, res) {
     }
 
     const estimativa = await estimateTask(tituloFinal, descricaoFinal);
-
-    const prioridade = estimativa?.prioridade || "Baixa";
-    const esforco = estimativa?.esforco || "";
-
+    
+    const prioridade = estimativa?.priority || "Baixa";
+    const esforco = estimativa?.effort || "";
+   
     const newTask = await taskService.saveTask({
       id,
       columnID,

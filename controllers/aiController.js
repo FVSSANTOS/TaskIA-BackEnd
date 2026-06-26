@@ -27,7 +27,7 @@ O formato deve ser no padrão que está no exemplo abaixo:
 {"priority": "", "effort": ""}
 Os valores de prioridade aceitos são: Alta, Média ou Baixa.
 O esforco deve ser uma estimativa de tempo (ex: "30 minutos", "1 hora", "3 horas").
-Título da tarefa: ${title}, Descrição da tarefa: ${description}
+Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
 `,
             },
           ],
@@ -43,6 +43,7 @@ Título da tarefa: ${title}, Descrição da tarefa: ${description}
 
     const rawText = response.data.candidates[0].content.parts[0].text;
     const resultado = JSON.parse(rawText);
+    
     return resultado;
   } catch (error) {
     console.error(
