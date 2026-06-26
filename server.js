@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const taskRoutes = require("./routes/tasksRoutes");
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require("./routes/userRoutes");
 const columnRoutes = require("./routes/columnRoutes");
 
 const app = express();
@@ -15,11 +15,11 @@ app.use(cors({
 
 // middleware para ler  o json vindo do front-end
 app.use(express.json());
+app.use(cors());
 
-//acesar a api nos tasks routtes
+// acessar a api nos tasks routes
 app.use("/api/tasks", taskRoutes);
-
-app.use('/users', userRoutes);
+app.use("/users", userRoutes);
 app.use("/api/columns", columnRoutes);
 
 app.listen(PORT, () => {

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1782440704955",
+    "title": "Criando o contollers da api",
+    "description": "Criando o contollers d",
+    "columnId": "done",
+    "priority": "low",
+    "effort": "6 horas",
+    "createdAt": "2026-06-26T02:25:04.956Z",
+    "updatedAt": "2026-06-26T02:31:34.023Z",
+    "createdBy": "Current User",
+    "assignedTo": "Current User",
+    "isEditing": false
+  },
+  {
+    "id": "1782441121599",
+    "title": "criando imagem docker",
+    "description": "usando imagem node",
+    "columnId": "in-progress",
+    "priority": "low",
+    "effort": "2 horas",
+    "createdAt": "2026-06-26T02:32:01.599Z",
+    "updatedAt": "2026-06-26T02:32:01.600Z"
+  },
+  {
+    "id": "1782441418152",
+    "title": "Integrando Front-end e back-end",
+    "description": "Integrando Front-end e back-end, usando node.js +react e google gemini",
+    "columnId": "todo",
+    "priority": "low",
+    "effort": "8 horas",
+    "createdAt": "2026-06-26T02:36:58.152Z",
+    "updatedAt": "2026-06-26T02:36:58.152Z"
+  },
+  {
+    "id": "1782441635239",
+    "title": "Criar arquitetura escalavel",
+    "description": "Criar arquitetura escalavel com sprinbgoot + aws lambda",
+    "columnId": "todo",
+    "priority": "high",
+    "effort": "1 dia",
+    "createdAt": "2026-06-26T02:40:35.239Z",
+    "updatedAt": "2026-06-26T02:40:35.239Z"
+  },
+  {
+    "id": "1782441771469",
+    "title": "Revisando design responsivel",
+    "description": "Revisando design responsivel da page, estilizações de botões também.",
+    "columnId": "in-progress",
+    "priority": "medium",
+    "effort": "3 horas",
+    "createdAt": "2026-06-26T02:42:51.469Z",
+    "updatedAt": "2026-06-26T02:42:51.469Z"
+  },
+  {
+    "id": "1782442073556",
+    "title": "Criando nova imagem Docker",
+    "description": "Criando imagem docker a partir de Java",
+    "columnId": "in-progress",
+    "priority": "medium",
+    "effort": "3 horas",
+    "createdAt": "2026-06-26T02:47:53.556Z",
+    "updatedAt": "2026-06-26T02:47:53.556Z"
+  }
+]

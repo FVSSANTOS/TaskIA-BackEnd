@@ -13,26 +13,58 @@ async function getAllTasks(req, res) {
 async function createTask(req, res) {
   try {
     console.log("createTask body:", req.body);
-    const { id, titulo, descricao, columnID } = req.body;
+    const {
+      id,
+      title,
+      description,
+      columnId,
+      titulo,
+      descricao,
+      columnID,
+      priority,
+      prioridade,
+    } = req.body;
 
-    if (!titulo) {
+    const taskTitle = title || titulo;
+    if (!taskTitle) {
       return res.status(400).json({ error: "O título é obrigatório" });
     }
 
-    const { prioridade, esforco } = await estimateTask(titulo, descricao);
+    const taskDescription = description || descricao || "";
+    const taskColumnId = columnId || columnID || "todo";
+    const providedPriority = priority || prioridade;
 
-    const newTask = await taskService.saveTasks({
-      id,
-      columnID,
-      titulo,
-      descricao,
-      prioridade,
-      esforco,
-    });
+    const evaluation = await estimateTask(taskTitle, taskDescription);
+    const aiPriority = evaluation?.priority || evaluation?.prioridade;
+    const aiEffort = evaluation?.effort || evaluation?.esforco || "";
+
+    const priorityValue = normalizePriority(providedPriority || aiPriority);
+    const newTask = {
+      id: id || String(Date.now()),
+      title: taskTitle,
+      description: taskDescription,
+      columnId: taskColumnId,
+      priority: priorityValue,
+      effort: aiEffort,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    await taskService.addTask(newTask);
     res.status(201).json(newTask);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
+}
+
+function normalizePriority(value) {
+  if (!value) return "low";
+  const str = String(value).toLowerCase();
+  if (str.includes("alta") || str.includes("high")) return "high";
+  if (str.includes("média") || str.includes("media") || str.includes("medium"))
+    return "medium";
+  return "low";
 }
 
 async function updateTask(req, res) {

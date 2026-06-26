@@ -23,12 +23,16 @@ async function getTaskById(id) {
   return task;
 }
 
-
-async function saveTasks(newTask) {
-  const data = await fs.readFile(tasksFilePath, "utf-8");
-  const tasks = JSON.parse(data);
-  tasks.push(newTask);
+async function saveTasks(tasks) {
   await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
+  return tasks;
+}
+
+async function addTask(newTask) {
+  const tasks = await getTasks();
+  tasks.push(newTask);
+  await saveTasks(tasks);
+  return newTask;
 }
 
 // func para atualizar task
@@ -48,11 +52,13 @@ async function deleteTask(id) {
   const tasks = await getTasks();
   const filteredTasks = tasks.filter((t) => t.id != id);
   await saveTasks(filteredTasks);
+  return filteredTasks;
 }
 
 module.exports = {
   getTasks,
   getTaskById,
+  addTask,
   saveTasks,
   updateTask,
   deleteTask,

@@ -3,12 +3,12 @@ require("dotenv").config();
 
 async function estimateTask(titulo, descricao) {
   if (!titulo) {
-    return "O campo 'titulo' é obrigatório.";
+    return { prioridade: "baixa", esforco: "30 minutos" };
   }
 
   const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
   if (!GOOGLE_API_KEY) {
-    return "GOOGLE_API_KEY não está configurada.";
+    return { prioridade: "baixa", esforco: "30 minutos" };
   }
 
   try {
@@ -22,11 +22,12 @@ async function estimateTask(titulo, descricao) {
               text: `Você é um assistente de gerenciamento de projetos.
 Ao receber o título de uma tarefa, responda APENAS com um JSON válido,
 sem nenhum texto adicional, sem markdown, sem explicações.
-O formato deve ser no padrão que está no exemplo abaixo:
+O formato deve ser exatamente:
 {"prioridade": "", "esforco": ""}
-Os valores de prioridade aceitos são: Alta, Média ou Baixa.
-O esforco deve ser uma estimativa de tempo (ex: "30 minutos", "1 hora", "3 horas").
-Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
+Use apenas os valores Alta, Média ou Baixa para prioridade.
+Use apenas um valor de tempo para esforço, como "30 minutos", "1 hora" ou "3 horas".
+Título da tarefa: ${taskTitle}
+Descrição da tarefa: ${taskDescription}
 `,
             },
           ],
@@ -40,10 +41,19 @@ Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
       },
     });
 
-    // A resposta do Gemini 2.5 flash deve vir em um formato similar a:
-    // { "candidates": [ { "content": { "parts": [ { "text": "{"prioridade": "Média", "esforco": "1 hora"}" } ] } } ] }
-    const rawText = response.data.candidates[0].content.parts[0].text;
-    const resultado = JSON.parse(rawText);
+    const rawText = extractRawText(response.data);
+    if (!rawText) {
+      return { prioridade: "baixa", esforco: "30 minutos" };
+    }
+
+    const resultado = parseJsonFromText(rawText);
+    if (!resultado) {
+      console.warn(
+        "IA retornou texto inesperado, fallback para baixa:",
+        rawText,
+      );
+      return { prioridade: "baixa", esforco: "30 minutos" };
+    }
 
     return resultado;
   } catch (error) {
@@ -51,7 +61,59 @@ Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
       "Erro ao chamar a LLM:",
       error.response ? error.response.data : error.message,
     );
-    return "Falha ao obter estimativa da IA.";
+    return { prioridade: "baixa", esforco: "30 minutos" };
+  }
+}
+
+function extractRawText(data) {
+  if (!data) return null;
+
+  if (typeof data === "string") return data;
+
+  const candidateList = data?.candidates || [];
+  for (const candidate of candidateList) {
+    const content = candidate.content;
+    if (!content) continue;
+
+    if (Array.isArray(content)) {
+      for (const item of content) {
+        const text = item?.parts?.[0]?.text || item?.text;
+        if (text) return text;
+      }
+    }
+
+    const text = content?.parts?.[0]?.text || content?.text;
+    if (text) return text;
+  }
+
+  if (data?.output?.[0]?.content) {
+    for (const block of data.output[0].content) {
+      if (typeof block.text === "string") return block.text;
+    }
+  }
+
+  return null;
+}
+
+function parseJsonFromText(text) {
+  if (typeof text !== "string") return null;
+
+  const match = text.match(/{[\s\S]*}/);
+  const target = match ? match[0] : text;
+
+  try {
+    return JSON.parse(target);
+  } catch {
+    const normalized = target
+      .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":')
+      .replace(/'/g, '"')
+      .replace(/\s+\n/g, " ");
+
+    try {
+      return JSON.parse(normalized);
+    } catch {
+      return null;
+    }
   }
 }
 

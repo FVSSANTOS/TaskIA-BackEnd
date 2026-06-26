@@ -22,37 +22,43 @@ async function getColumnById(id) {
   return column;
 }
 
-// func para salvar no arquivo
-async function saveColumn(newColumn) {
-  const data = await fs.readFile(columnFilePath, "utf-8");
-  const columns = JSON.parse(data);
-  columns.push(newColumn);
+async function saveColumns(columns) {
   await fs.writeFile(columnFilePath, JSON.stringify(columns, null, 2));
+  return columns;
+}
+
+async function addColumn(newColumn) {
+  const columns = await getColumns();
+  columns.push(newColumn);
+  await saveColumns(columns);
+  return newColumn;
 }
 
 // func para atualizar task
 async function updateColumn(id, updateData) {
-  const column = await getColumns();
-  const columnIndex = column.findIndex((t) => t.id == id);
+  const columns = await getColumns();
+  const columnIndex = columns.findIndex((t) => t.id == id);
 
-  if (columnIndex === -1) throw new Error("Colunas não encontrada");
+  if (columnIndex === -1) throw new Error("Coluna não encontrada");
 
-  column[columnIndex] = { ...column[columnIndex], ...updateData };
-  await saveColumn(column);
-  return column[columnIndex];
+  columns[columnIndex] = { ...columns[columnIndex], ...updateData };
+  await saveColumns(columns);
+  return columns[columnIndex];
 }
 
 // func para deletar task
 async function deleteColumn(id) {
-  const column = await getColumns();
-  const filteredColumn = column.filter((t) => t.id != id);
-  await saveColumn(filteredColumn);
+  const columns = await getColumns();
+  const filteredColumns = columns.filter((t) => t.id != id);
+  await saveColumns(filteredColumns);
+  return filteredColumns;
 }
 
 module.exports = {
   getColumns,
   getColumnById,
-  saveColumn,
+  addColumn,
+  saveColumns,
   updateColumn,
   deleteColumn,
 };

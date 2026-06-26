@@ -11,11 +11,19 @@ async function getAllColumn(req, res) {
 
 async function createColumn(req, res) {
   try {
-    const titulo = req.body;
-    if (!titulo) {
+    const { id, title, titulo } = req.body;
+    const columnTitle = title || titulo;
+
+    if (!columnTitle) {
       return res.status(400).json({ error: "O título é obrigatório" });
     }
-    const newColumn = await columnService.saveColumn(req.body);
+
+    const newColumn = {
+      id: id || String(Date.now()),
+      title: columnTitle,
+    };
+
+    await columnService.addColumn(newColumn);
     res.status(201).json(newColumn);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -47,7 +55,7 @@ async function getColumnById(req, res) {
   try {
     const { id } = req.params;
     const column = await columnService.getColumnById(id);
-    res.status(200).json(column)
+    res.status(200).json(column);
   } catch (error) {
     if (error.message === "Coluna não encontrada") {
       return res.status(404).json({ error: error.message });
