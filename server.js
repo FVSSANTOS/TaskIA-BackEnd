@@ -6,6 +6,9 @@ const columnRoutes = require("./routes/columnRoutes");
 const app = express();
 const PORT = 3000;
 
+// Habilitar CORS
+app.use(cors());
+
 // middleware para ler  o json vindo do front-end
 app.use(express.json());
 

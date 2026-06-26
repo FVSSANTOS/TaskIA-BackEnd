@@ -1,3 +1,14 @@
 [
-
+  {
+    "id": "backlog",
+    "title": "Backlog"
+  },
+  {
+    "id": "inProgress",
+    "title": "In Progress"
+  },
+  {
+    "id": "done",
+    "title": "Done"
+  }
 ]

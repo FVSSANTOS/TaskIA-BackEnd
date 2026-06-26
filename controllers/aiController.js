@@ -6,9 +6,9 @@ async function estimateTask(titulo, descricao) {
     return "O campo 'titulo' é obrigatório.";
   }
 
-  const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+  const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
   if (!GOOGLE_API_KEY) {
-    return "GOOGLE_API_KEY não está configurada.";
+    return "GOOGLE_API_KEY ou GEMINI_API_KEY não está configurada.";
   }
 
   try {

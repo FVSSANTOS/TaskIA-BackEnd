@@ -1,4 +1,76 @@
-<<<<<<< HEAD
-[]
-=======
->>>>>>> 709dc98afc4fd357039384a84b7ba7582b39a48d
+[
+  {
+    "id": "1782492011875",
+    "columnID": "backlog",
+    "titulo": "Criar rota",
+    "descricao": ""
+  },
+  {
+    "id": "1782492093782",
+    "columnID": "backlog",
+    "titulo": "rotas criadas",
+    "descricao": ""
+  },
+  {
+    "id": "1782492876952",
+    "columnID": "inProgress",
+    "titulo": "Criar Rotas",
+    "descricao": "11",
+    "prioridade": "Média",
+    "esforco": "3 horas"
+  },
+  {
+    "id": "1782492994107",
+    "columnID": "inProgress",
+    "titulo": "Criar Rotas",
+    "descricao": "1111"
+  },
+  {
+    "id": "1782493211503",
+    "columnID": "done",
+    "titulo": "Criar rotas",
+    "descricao": "123233",
+    "prioridade": "Alta",
+    "esforco": "3 horas",
+    "createdBy": "Current User",
+    "createdAt": "2026-06-26T17:10:25.584Z",
+    "assignedTo": "Current User",
+    "updatedAt": null
+  },
+  {
+    "id": "1782493228997",
+    "columnID": "inProgress",
+    "titulo": "Criar integração front end com back end",
+    "descricao": "",
+    "prioridade": "Alta",
+    "esforco": "8 horas"
+  },
+  {
+    "id": "1782493308247",
+    "columnID": "backlog",
+    "titulo": "Criar task",
+    "descricao": "",
+    "prioridade": "Média",
+    "esforco": "15 minutos"
+  },
+  {
+    "id": "1782493427575",
+    "columnID": "done",
+    "titulo": "Refatorar o Código",
+    "descricao": "",
+    "prioridade": "Alta",
+    "esforco": "8 horas"
+  },
+  {
+    "id": "1782493594443",
+    "columnID": "done",
+    "titulo": "Implementar integração",
+    "descricao": "",
+    "prioridade": "Alta",
+    "esforco": "8 horas",
+    "createdBy": "Current User",
+    "createdAt": "2026-06-26T17:06:52.883Z",
+    "assignedTo": "Current User",
+    "updatedAt": null
+  }
+]
