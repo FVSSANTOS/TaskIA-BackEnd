@@ -8,5 +8,15 @@
     "createdAt": "2026-06-26T18:13:44.482Z",
     "createdBy": "Current User",
     "assignedTo": "Current User"
+  },
+  {
+    "id": "1782498581567",
+    "columnID": "inProgress",
+    "title": "Criar front",
+    "priority": "Média",
+    "effort": "8 horas",
+    "createdAt": "2026-06-26T18:29:41.568Z",
+    "createdBy": "Current User",
+    "assignedTo": "Current User"
   }
 ]
