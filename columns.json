@@ -1,3 +1,17 @@
 [
-
+  {
+    "id": "todo",
+    "title": "A Fazer",
+    "order": 1
+  },
+  {
+    "id": "doing",
+    "title": "Fazendo",
+    "order": 2
+  },
+  {
+    "id": "done",
+    "title": "Concluído",
+    "order": 3
+  }
 ]

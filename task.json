@@ -1,4 +1,32 @@
-<<<<<<< HEAD
-[]
-=======
->>>>>>> 709dc98afc4fd357039384a84b7ba7582b39a48d
+[
+  {
+    "id": 1782450888803,
+    "columnID": "todo",
+    "title": "sndksndd",
+    "description": "sdnskdnks"
+  },
+  {
+    "id": 1782451324936,
+    "columnID": "doing",
+    "title": "Criar tela de login",
+    "description": "tela de login com autenticação JWT"
+  },
+  {
+    "id": 1782451405749,
+    "columnID": "doing",
+    "title": "Melhorar UI",
+    "description": "Utilizar tailwindcss para deixar a aplicação moderna"
+  },
+  {
+    "id": 1782451539904,
+    "columnID": "doing",
+    "title": "criar lógica da task",
+    "description": "qualquer coisas"
+  },
+  {
+    "id": 1782451680271,
+    "columnID": "todo",
+    "title": "criar componente do card",
+    "description": "usar shadcn"
+  }
+]
