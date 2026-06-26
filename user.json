@@ -22,5 +22,36 @@
     "username": "joaoads",
     "password": "123asd456",
     "email": "josao@esmail.com"
+  },
+  {
+    "id": 1782487606028,
+    "username": "joao",
+    "password": "123asd4",
+    "email": "joaoads@gmail.com"
+  },
+  {
+    "id": 1782493955726,
+    "password": "12345",
+    "email": "joaoteste@gmail.com"
+  },
+  {
+    "id": 1782493980026,
+    "password": "12345",
+    "email": "testejoao@gmail.com"
+  },
+  {
+    "id": 1782494003673,
+    "password": "123455",
+    "email": "testaejoao@gmail.com"
+  },
+  {
+    "id": 1782494063421,
+    "password": "1234",
+    "email": "joaoluiz@gmail.com"
+  },
+  {
+    "id": 1782494312669,
+    "password": "1234",
+    "email": "joaolll@gmail.com"
   }
 ]

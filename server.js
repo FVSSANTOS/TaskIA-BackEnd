@@ -7,6 +7,12 @@ const columnRoutes = require("./routes/columnRoutes");
 const app = express();
 const PORT = 3000;
 
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
 // middleware para ler  o json vindo do front-end
 app.use(express.json());
 

@@ -12,8 +12,8 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await userServices.login(username, password);
+    const { email, password } = req.body;
+    const user = await userServices.login(email, password);
     res.status(200).json({ message: 'Login realizado com sucesso!', user });
   } catch (error) {
     res.status(401).json({ error: error.message });

@@ -17,7 +17,7 @@ function saveUsers(users) {
 // registrar usuário
 exports.register = (username, password, email) => {
   const users = readUsers();
-  const userExists = users.find(u => u.username === username);
+  const userExists = users.find(u => u.email === email);
 
   if (userExists) {
     throw new Error('Usuário já existe!');
@@ -31,9 +31,9 @@ exports.register = (username, password, email) => {
 };
 
 // login de usuário
-exports.login = (username, password) => {
+exports.login = (email, password) => {
   const users = readUsers();
-  const user = users.find(u => u.username === username && u.password === password);
+  const user = users.find(u => u.email === email && u.password === password);
 
   if (!user) {
     throw new Error('Credenciais inválidas!');
