@@ -22,7 +22,7 @@ async function createTask(req, res) {
     }
 
     const { priority, effort } = await estimateTask(title, description);
-
+    console.log(priority)
 
     const newTask = await taskService.saveTask({
       id,

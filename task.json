@@ -28,5 +28,27 @@
     "columnID": "todo",
     "title": "criar componente do card",
     "description": "usar shadcn"
+  },
+  {
+    "id": 5,
+    "columnID": 1,
+    "title": "Criar controllers"
+  },
+  {
+    "id": 6,
+    "columnID": 1,
+    "title": "Criar controllers"
+  },
+  {
+    "id": 10,
+    "columnID": 2,
+    "title": "Criar controllers"
+  },
+  {
+    "id": 11,
+    "columnID": 2,
+    "title": "Criar controllers",
+    "priority": "Alta",
+    "effort": "3 horas"
   }
 ]

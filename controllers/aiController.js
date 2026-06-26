@@ -39,12 +39,11 @@ Título da tarefa: ${title}, Descrição da tarefa: ${description}
         "Content-Type": "application/json",
       },
     });
-    console.log("response da API", response);
     // A resposta do Gemini 2.5 flash deve vir em um formato similar a:
     // { "candidates": [ { "content": { "parts": [ { "text": "{"prioridade": "Média", "esforco": "1 hora"}" } ] } } ] }
     const rawText = response.data.candidates[0].content.parts[0].text;
     const resultado = JSON.parse(rawText);
-
+    console.log
     return resultado;
   } catch (error) {
     console.error(
