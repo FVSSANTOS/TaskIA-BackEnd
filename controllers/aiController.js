@@ -1,14 +1,15 @@
 const axios = require("axios");
 require("dotenv").config();
 
-async function estimateTask(title, description) {
-  if (!title) {
-    return "O campo 'titulo' é obrigatório.";
+async function estimateTask(titulo, descricao) {
+  if (!titulo) {
+    return { prioridade: "Baixa", esforco: "" };
   }
 
   const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
   if (!GOOGLE_API_KEY) {
-    return "GOOGLE_API_KEY ou GEMINI_API_KEY não está configurada.";
+    console.warn("GOOGLE_API_KEY ou GEMINI_API_KEY não está configurada.");
+    return { prioridade: "Baixa", esforco: "" };
   }
 
   try {
@@ -23,10 +24,10 @@ async function estimateTask(title, description) {
 Ao receber o título de uma tarefa, responda APENAS com um JSON válido,
 sem nenhum texto adicional, sem markdown, sem explicações.
 O formato deve ser no padrão que está no exemplo abaixo:
-{"priority": "", "effort": ""}
+{"prioridade": "", "esforco": ""}
 Os valores de prioridade aceitos são: Alta, Média ou Baixa.
 O esforco deve ser uma estimativa de tempo (ex: "30 minutos", "1 hora", "3 horas").
-Título da tarefa: ${title}, Descrição da tarefa: ${description}
+Título da tarefa: ${titulo}, Descrição da tarefa: ${descricao}
 `,
             },
           ],
@@ -39,18 +40,16 @@ Título da tarefa: ${title}, Descrição da tarefa: ${description}
         "Content-Type": "application/json",
       },
     });
-    // A resposta do Gemini 2.5 flash deve vir em um formato similar a:
-    // { "candidates": [ { "content": { "parts": [ { "text": "{"prioridade": "Média", "esforco": "1 hora"}" } ] } } ] }
+
     const rawText = response.data.candidates[0].content.parts[0].text;
     const resultado = JSON.parse(rawText);
-    console.log
     return resultado;
   } catch (error) {
     console.error(
       "Erro ao chamar a LLM:",
       error.response ? error.response.data : error.message,
     );
-    return "Falha ao obter estimativa da IA.";
+    return { prioridade: "Baixa", esforco: "" };
   }
 }
 

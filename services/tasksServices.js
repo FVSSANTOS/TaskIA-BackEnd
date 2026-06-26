@@ -28,7 +28,7 @@ async function saveAllTasks(tasks) {
   await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
 }
 
-async function saveTasks(newTask) {
+async function saveTask(newTask) {
   const tasks = await getTasks();
   tasks.push(newTask);
   await saveAllTasks(tasks);
@@ -57,7 +57,7 @@ async function deleteTask(id) {
 module.exports = {
   getTasks,
   getTaskById,
-  saveTasks,
+  saveTask,
   updateTask,
   deleteTask,
 };
