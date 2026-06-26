@@ -1,7 +1,32 @@
 [
   {
+<<<<<<< HEAD
     "id": 1782440631342,
     "username": "testuser2",
     "password": "testpass"
+=======
+    "id": 1719330000000,
+    "username": "luiz",
+    "password": "123456",
+    "email": "luiz@email.com"
+  },
+  {
+    "id": 1782426778285,
+    "username": "joao",
+    "password": "123456",
+    "email": "joao@email.com"
+  },
+  {
+    "id": 1782426844115,
+    "username": "joaos",
+    "password": "123456",
+    "email": "josao@email.com"
+  },
+  {
+    "id": 1782426903373,
+    "username": "joaoads",
+    "password": "123asd456",
+    "email": "josao@esmail.com"
+>>>>>>> 790b02523b50ca129a282799f067f136a53c1e07
   }
 ]
