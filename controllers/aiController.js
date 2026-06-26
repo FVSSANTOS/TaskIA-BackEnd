@@ -3,12 +3,13 @@ require("dotenv").config();
 
 async function estimateTask(titulo, descricao) {
   if (!titulo) {
-    return { prioridade: "baixa", esforco: "30 minutos" };
+    return { prioridade: "Baixa", esforco: "" };
   }
 
-  const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+  const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
   if (!GOOGLE_API_KEY) {
-    return { prioridade: "baixa", esforco: "30 minutos" };
+    console.warn("GOOGLE_API_KEY ou GEMINI_API_KEY não está configurada.");
+    return { prioridade: "Baixa", esforco: "" };
   }
 
   try {
@@ -41,79 +42,15 @@ Descrição da tarefa: ${taskDescription}
       },
     });
 
-    const rawText = extractRawText(response.data);
-    if (!rawText) {
-      return { prioridade: "baixa", esforco: "30 minutos" };
-    }
-
-    const resultado = parseJsonFromText(rawText);
-    if (!resultado) {
-      console.warn(
-        "IA retornou texto inesperado, fallback para baixa:",
-        rawText,
-      );
-      return { prioridade: "baixa", esforco: "30 minutos" };
-    }
-
+    const rawText = response.data.candidates[0].content.parts[0].text;
+    const resultado = JSON.parse(rawText);
     return resultado;
   } catch (error) {
     console.error(
       "Erro ao chamar a LLM:",
       error.response ? error.response.data : error.message,
     );
-    return { prioridade: "baixa", esforco: "30 minutos" };
-  }
-}
-
-function extractRawText(data) {
-  if (!data) return null;
-
-  if (typeof data === "string") return data;
-
-  const candidateList = data?.candidates || [];
-  for (const candidate of candidateList) {
-    const content = candidate.content;
-    if (!content) continue;
-
-    if (Array.isArray(content)) {
-      for (const item of content) {
-        const text = item?.parts?.[0]?.text || item?.text;
-        if (text) return text;
-      }
-    }
-
-    const text = content?.parts?.[0]?.text || content?.text;
-    if (text) return text;
-  }
-
-  if (data?.output?.[0]?.content) {
-    for (const block of data.output[0].content) {
-      if (typeof block.text === "string") return block.text;
-    }
-  }
-
-  return null;
-}
-
-function parseJsonFromText(text) {
-  if (typeof text !== "string") return null;
-
-  const match = text.match(/{[\s\S]*}/);
-  const target = match ? match[0] : text;
-
-  try {
-    return JSON.parse(target);
-  } catch {
-    const normalized = target
-      .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":')
-      .replace(/'/g, '"')
-      .replace(/\s+\n/g, " ");
-
-    try {
-      return JSON.parse(normalized);
-    } catch {
-      return null;
-    }
+    return { prioridade: "Baixa", esforco: "" };
   }
 }
 

@@ -22,15 +22,14 @@ async function getColumnById(id) {
   return column;
 }
 
-async function saveColumns(columns) {
+async function saveAllColumns(columns) {
   await fs.writeFile(columnFilePath, JSON.stringify(columns, null, 2));
-  return columns;
 }
 
-async function addColumn(newColumn) {
+async function saveColumn(newColumn) {
   const columns = await getColumns();
   columns.push(newColumn);
-  await saveColumns(columns);
+  await saveAllColumns(columns);
   return newColumn;
 }
 
@@ -42,16 +41,15 @@ async function updateColumn(id, updateData) {
   if (columnIndex === -1) throw new Error("Coluna não encontrada");
 
   columns[columnIndex] = { ...columns[columnIndex], ...updateData };
-  await saveColumns(columns);
+  await saveAllColumns(columns);
   return columns[columnIndex];
 }
 
 // func para deletar task
 async function deleteColumn(id) {
   const columns = await getColumns();
-  const filteredColumns = columns.filter((t) => t.id != id);
-  await saveColumns(filteredColumns);
-  return filteredColumns;
+  const filteredColumn = columns.filter((t) => t.id != id);
+  await saveAllColumns(filteredColumn);
 }
 
 module.exports = {

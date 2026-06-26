@@ -5,17 +5,18 @@ const userRoutes = require("./routes/userRoutes");
 const columnRoutes = require("./routes/columnRoutes");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// Habilitar CORS
+app.use(cors());
+app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: true
 }));
 
 // middleware para ler  o json vindo do front-end
-app.use(express.json());
-app.use(cors());
+
+
 
 // acessar a api nos tasks routes
 app.use("/api/tasks", taskRoutes);

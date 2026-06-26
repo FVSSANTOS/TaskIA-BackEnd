@@ -23,15 +23,15 @@ async function getTaskById(id) {
   return task;
 }
 
-async function saveTasks(tasks) {
+
+async function saveAllTasks(tasks) {
   await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
-  return tasks;
 }
 
-async function addTask(newTask) {
+async function saveTask(newTask) {
   const tasks = await getTasks();
   tasks.push(newTask);
-  await saveTasks(tasks);
+  await saveAllTasks(tasks);
   return newTask;
 }
 
@@ -43,7 +43,7 @@ async function updateTask(id, updateData) {
   if (taskIndex === -1) throw new Error("Tarefa não encontrada");
 
   tasks[taskIndex] = { ...tasks[taskIndex], ...updateData };
-  await saveTasks(tasks);
+  await saveAllTasks(tasks);
   return tasks[taskIndex];
 }
 
@@ -51,15 +51,13 @@ async function updateTask(id, updateData) {
 async function deleteTask(id) {
   const tasks = await getTasks();
   const filteredTasks = tasks.filter((t) => t.id != id);
-  await saveTasks(filteredTasks);
-  return filteredTasks;
+  await saveAllTasks(filteredTasks);
 }
 
 module.exports = {
   getTasks,
   getTaskById,
-  addTask,
-  saveTasks,
+  saveTask,
   updateTask,
   deleteTask,
 };
